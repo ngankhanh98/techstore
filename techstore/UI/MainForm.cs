@@ -25,16 +25,7 @@ namespace techstore
 
         public void OnLoad()
         {
-            //string path = "SERVER=db4free.net; PORT=3306; DATABASE=techmart; UID=techmart; PWD=techmart;oldguids=true";
-            //MySqlConnection conn = new MySqlConnection(path);
-
-            //string query = "SELECT * FROM Products";
-            //MySqlDataAdapter adapter = new MySqlDataAdapter(query,conn);
-
-            //DataTable table = new DataTable();
-            //adapter.Fill(table);
             DataTable table = proDAO.OnLoad().Tables[0];
-
             dgvProducts.DataSource = table;
         }
 
@@ -42,23 +33,12 @@ namespace techstore
         {
             AddEditForm form = new AddEditForm();
             form.OnInsert += Form_OnInsert;
-
-
             form.Show();
         }
 
         private void Form_OnInsert(Product product)
         {
-            //string path = "SERVER=db4free.net; PORT=3306; DATABASE=techmart; UID=techmart; PWD=techmart;oldguids=true";
-            //MySqlConnection conn = new MySqlConnection(path);
-
-            //string cmd = string.Format("INSERT INTO `Products`(`Name`, `Brand`, `Price`, `Description`, `Available`) VALUES ('{0}','{1}',{2},'{3}',{4})",product.name, product.brand, product.price, product.des, product.available);
-            //conn.Open();
-            //MySqlCommand command = new MySqlCommand(cmd, conn);
-            //command.ExecuteNonQuery();
-            //conn.Close();
             proDAO.OnInsert(product);
-
             OnLoad();
         }
 
@@ -78,15 +58,6 @@ namespace techstore
 
         private void Form_OnUpdate(Product product)
         {
-            //string path = "SERVER=db4free.net; PORT=3306; DATABASE=techmart; UID=techmart; PWD=techmart;oldguids=true";
-            //MySqlConnection conn = new MySqlConnection(path);
-
-            //string cmd = string.Format("UPDATE `Products` SET `Price`={2},`Description`='{3}',`Available`={4} WHERE `Name`='{0}' AND `Brand`='{1}'", product.name, product.brand, product.price, product.des, product.available);
-            //conn.Open();
-            //MySqlCommand command = new MySqlCommand(cmd, conn);
-            //command.ExecuteNonQuery();
-            //conn.Close();
-
             proDAO.OnUpdate(product);
             OnLoad();
         }
@@ -99,14 +70,6 @@ namespace techstore
                 product.name = dgvProducts.CurrentRow.Cells[0].Value.ToString();
                 product.brand = dgvProducts.CurrentRow.Cells[1].Value.ToString();
 
-                //string path = "SERVER=db4free.net; PORT=3306; DATABASE=techmart; UID=techmart; PWD=techmart;oldguids=true";
-                //MySqlConnection conn = new MySqlConnection(path);
-
-                //string cmd = string.Format("DELETE FROM `Products` WHERE `Name`='{0}' AND `Brand`='{1}'", product.name, product.brand);
-                //conn.Open();
-                //MySqlCommand command = new MySqlCommand(cmd, conn);
-                //command.ExecuteNonQuery();
-                //conn.Close();
                 proDAO.OnDelete(product);
                 OnLoad();
             }
