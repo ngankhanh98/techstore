@@ -8,15 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using techstore.BUS;
-using techstore.DAO;
-using techstore.DTO;
+using techstore.techstoreBUS;
 using techstore.UI;
 
 namespace techstore
 {
     public partial class MainForm : Form
     {
+        techstoreBUS.techstoreBUSSoapClient proDAO = new techstoreBUS.techstoreBUSSoapClient();
+
         public MainForm()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace techstore
 
             //DataTable table = new DataTable();
             //adapter.Fill(table);
-            DataTable table = new ProductBUS().OnLoad();
+            DataTable table = proDAO.OnLoad().Tables[0];
 
             dgvProducts.DataSource = table;
         }
@@ -57,7 +57,7 @@ namespace techstore
             //MySqlCommand command = new MySqlCommand(cmd, conn);
             //command.ExecuteNonQuery();
             //conn.Close();
-            new ProductBUS().OnInsert(product);
+            proDAO.OnInsert(product);
 
             OnLoad();
         }
@@ -87,7 +87,7 @@ namespace techstore
             //command.ExecuteNonQuery();
             //conn.Close();
 
-            new ProductBUS().OnUpdate(product);
+            proDAO.OnUpdate(product);
             OnLoad();
         }
 
@@ -107,7 +107,7 @@ namespace techstore
                 //MySqlCommand command = new MySqlCommand(cmd, conn);
                 //command.ExecuteNonQuery();
                 //conn.Close();
-                new ProductBUS().OnDelete(product);
+                proDAO.OnDelete(product);
                 OnLoad();
             }
         }

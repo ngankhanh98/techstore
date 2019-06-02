@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="OnLoad">
+        <s:complexType />
+      </s:element>
+      <s:element name="OnLoadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OnLoadResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OnUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="product" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Product">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="brand" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="price" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="des" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="available" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="OnUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OnUpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OnInsert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="product" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OnInsertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OnInsertResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OnDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="product" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OnDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OnDeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="OnLoadSoapIn">
+    <wsdl:part name="parameters" element="tns:OnLoad" />
+  </wsdl:message>
+  <wsdl:message name="OnLoadSoapOut">
+    <wsdl:part name="parameters" element="tns:OnLoadResponse" />
+  </wsdl:message>
+  <wsdl:message name="OnUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:OnUpdate" />
+  </wsdl:message>
+  <wsdl:message name="OnUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:OnUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="OnInsertSoapIn">
+    <wsdl:part name="parameters" element="tns:OnInsert" />
+  </wsdl:message>
+  <wsdl:message name="OnInsertSoapOut">
+    <wsdl:part name="parameters" element="tns:OnInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="OnDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:OnDelete" />
+  </wsdl:message>
+  <wsdl:message name="OnDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:OnDeleteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="techstoreBUSSoap">
+    <wsdl:operation name="OnLoad">
+      <wsdl:input message="tns:OnLoadSoapIn" />
+      <wsdl:output message="tns:OnLoadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OnUpdate">
+      <wsdl:input message="tns:OnUpdateSoapIn" />
+      <wsdl:output message="tns:OnUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OnInsert">
+      <wsdl:input message="tns:OnInsertSoapIn" />
+      <wsdl:output message="tns:OnInsertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OnDelete">
+      <wsdl:input message="tns:OnDeleteSoapIn" />
+      <wsdl:output message="tns:OnDeleteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="techstoreBUSSoap" type="tns:techstoreBUSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="OnLoad">
+      <soap:operation soapAction="http://tempuri.org/OnLoad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnUpdate">
+      <soap:operation soapAction="http://tempuri.org/OnUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnInsert">
+      <soap:operation soapAction="http://tempuri.org/OnInsert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnDelete">
+      <soap:operation soapAction="http://tempuri.org/OnDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="techstoreBUSSoap12" type="tns:techstoreBUSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="OnLoad">
+      <soap12:operation soapAction="http://tempuri.org/OnLoad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnUpdate">
+      <soap12:operation soapAction="http://tempuri.org/OnUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnInsert">
+      <soap12:operation soapAction="http://tempuri.org/OnInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnDelete">
+      <soap12:operation soapAction="http://tempuri.org/OnDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="techstoreBUS">
+    <wsdl:port name="techstoreBUSSoap" binding="tns:techstoreBUSSoap">
+      <soap:address location="http://localhost:50812/techstoreBUS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="techstoreBUSSoap12" binding="tns:techstoreBUSSoap12">
+      <soap12:address location="http://localhost:50812/techstoreBUS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
